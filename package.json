@@ -1,0 +1,24 @@
+{
+  "name": "wely-travel",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "WELY Travel: sala de agentes IA que buscan vuelos en paralelo, coordinados por un código madre.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "buscar": "node madre-cli.mjs",
+    "real": "vite build && node server/servidor.mjs",
+    "servidor": "node server/servidor.mjs"
+  },
+  "dependencies": {
+    "@fontsource/jetbrains-mono": "^5.2.5",
+    "@fontsource/orbitron": "^5.2.5",
+    "@fontsource/pacifico": "^5.2.5",
+    "@fontsource/inter": "^5.2.5"
+  },
+  "devDependencies": { "vite": "^6.3.5" },
+  "optionalDependencies": { "playwright": "^1.49.0" },
+  "engines": { "node": ">=18" }
+}

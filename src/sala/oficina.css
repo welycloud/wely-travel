@@ -1,0 +1,228 @@
+/* WELY Travel — oficina estilo estilo OpenClaw Office (neón cyberpunk sobre pixel-art cálido). */
+:root {
+  --cy-dark: #0a0a0f;
+  --cy-darker: #050508;
+  --cy-purple: #9d4edd;
+  --cy-pink: #ff006e;
+  --cy-cyan: #00f5ff;
+  --cy-green: #39ff14;
+  --cy-yellow: #ffd700;
+  --cy-orange: #ff8327;
+  --cy-red: #ff0040;
+  /* El panel del buscador toma estos valores */
+  --panel: rgba(10, 10, 26, 0.92);
+  --panel-solid: #0d0d1f;
+  --line: rgba(0, 245, 255, 0.16);
+  --line-strong: rgba(0, 245, 255, 0.35);
+  --text: #e0e0e0;
+  --muted: #9aa4b8;
+  --dim: #6a7388;
+  --shadow: 0 0 22px rgba(0, 245, 255, 0.12), 0 10px 40px rgba(0, 0, 0, 0.6);
+}
+html, body, #app { margin: 0; height: 100%; overflow: hidden; }
+body {
+  background: var(--cy-darker);
+  background-image: linear-gradient(rgba(0, 245, 255, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 245, 255, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  color: #e0e0e0;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* ---------- barra superior ---------- */
+.of-top {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 20;
+  display: flex; align-items: center; gap: 18px; padding: 10px 18px;
+  background: linear-gradient(180deg, rgba(10, 10, 26, 0.96), rgba(10, 10, 26, 0.8));
+  border-bottom: 1px solid rgba(0, 245, 255, 0.25);
+  box-shadow: 0 0 18px rgba(0, 245, 255, 0.12);
+}
+.of-marca { display: flex; align-items: baseline; gap: 12px; min-width: 0; }
+.of-marca b {
+  font: 800 17px 'Orbitron', sans-serif; letter-spacing: 2px; color: var(--cy-cyan);
+  text-shadow: 0 0 5px var(--cy-cyan), 0 0 12px var(--cy-cyan), 0 0 24px rgba(0, 245, 255, 0.6);
+}
+.of-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--cy-green); box-shadow: 0 0 10px var(--cy-green); align-self: center; animation: of-pulso 1.6s infinite; }
+.of-sub { font-size: 11.5px; color: var(--muted); white-space: nowrap; }
+.of-sub code { color: var(--cy-orange); }
+.of-stats { display: flex; gap: 10px; margin-left: auto; }
+.of-stats .s {
+  font: 700 15px 'JetBrains Mono', monospace; padding: 4px 10px; border-radius: 8px;
+  border: 1px solid currentColor; background: rgba(0, 0, 0, 0.35); white-space: nowrap;
+}
+.of-stats small { font: 500 10.5px 'JetBrains Mono', monospace; opacity: 0.85; margin-left: 4px; }
+.of-stats .cian { color: var(--cy-cyan); box-shadow: 0 0 10px rgba(0, 245, 255, 0.25); }
+.of-stats .amarillo { color: var(--cy-yellow); box-shadow: 0 0 10px rgba(255, 215, 0, 0.2); }
+.of-stats .gris { color: #9aa4b8; }
+.of-stats .rojo { color: #ff4d6d; box-shadow: 0 0 10px rgba(255, 0, 64, 0.2); }
+.of-reloj { font: 600 16px 'JetBrains Mono', monospace; color: var(--cy-green); text-shadow: 0 0 8px rgba(57, 255, 20, 0.7); }
+.of-btn { background: transparent; border: 1px solid rgba(0, 245, 255, 0.4); color: var(--cy-cyan); border-radius: 8px; padding: 4px 10px; cursor: pointer; font-size: 15px; }
+.of-btn:hover { box-shadow: 0 0 12px rgba(0, 245, 255, 0.5); }
+
+/* ---------- escenario ---------- */
+.of-escenario { position: absolute; inset: 0; display: flex; justify-content: center; align-items: flex-start; }
+.of-caja { z-index: 1;
+  position: relative; --k: 2;
+  border: 2px solid rgba(0, 245, 255, 0.45); border-radius: 10px; overflow: hidden;
+  box-shadow: 0 0 24px rgba(0, 245, 255, 0.25), 0 0 80px rgba(157, 78, 221, 0.15);
+}
+.of-fondo { position: absolute; inset: 0; width: 100%; height: 100%; display: block; user-select: none; pointer-events: none;
+  image-rendering: auto; filter: saturate(1.04) contrast(1.03); }
+#actores { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+#luz { position: absolute; inset: 0; width: 100%; height: 100%; cursor: pointer; mix-blend-mode: screen; }
+.of-vineta { position: absolute; inset: 0; pointer-events: none; z-index: 2;
+  background: radial-gradient(ellipse at 50% 45%, transparent 60%, rgba(5, 3, 2, 0.35) 100%); }
+.of-capa { position: absolute; inset: 0; pointer-events: none; }
+
+/* ---------- letrero de neón: WELY Travel ---------- */
+.of-neon { position: absolute; left: 50%; top: 3.6%; width: 21%; transform: translateX(-50%); text-align: center; pointer-events: none; }
+.of-logo { width: 100%; height: auto; overflow: visible; }
+.of-logo text { stroke-linejoin: round; stroke-linecap: round; }
+.of-logo .wely-t { font: 800 205px 'Orbitron', sans-serif; letter-spacing: 6px; }
+.of-logo .air-t { font: 400 150px 'Pacifico', cursive; }
+.of-logo .tubo { fill: none; stroke-width: 15; }
+.of-logo .nucleo { fill: none; stroke-width: 4.5; }
+.g-wely { animation: of-titila 7s infinite; filter: drop-shadow(0 0 3px #ff4fa3) drop-shadow(0 0 10px #ff2d95) drop-shadow(0 0 26px rgba(255, 45, 149, 0.75)); }
+.g-wely .tubo { stroke: #ff4fa3; } .g-wely .nucleo { stroke: #ffe1f0; }
+.g-air { animation: of-titila 9s 1.5s infinite; filter: drop-shadow(0 0 3px #3ef2ff) drop-shadow(0 0 10px #18d6ff) drop-shadow(0 0 26px rgba(24, 214, 255, 0.75)); }
+.g-air .tubo { stroke: #3ef2ff; } .g-air .nucleo { stroke: #e6feff; }
+.of-logo .estela { fill: none; stroke: #fff6d8; stroke-width: 5; stroke-dasharray: 3 22; stroke-linecap: round; opacity: .9;
+  filter: drop-shadow(0 0 6px #ffe7a0); animation: wa-estela 2.4s linear infinite; }
+.of-logo .avion path { fill: rgba(255, 246, 216, .15); stroke: #fff6d8; stroke-width: 4; stroke-linejoin: round; }
+.of-logo .avion { filter: drop-shadow(0 0 4px #fff) drop-shadow(0 0 14px #ffd36b); animation: wa-avion 3.5s ease-in-out infinite; transform-box: fill-box; }
+@keyframes wa-estela { to { stroke-dashoffset: -50; } }
+@keyframes wa-avion { 0%, 100% { translate: 0 0; } 50% { translate: 6px -6px; } }
+.of-marca b i { font: 400 18px 'Pacifico', cursive; color: #3ef2ff; text-shadow: 0 0 8px #18d6ff; margin-left: 2px; letter-spacing: 0; }
+.of-et.wely .tag { border-color: #ff4fa3 !important; background: #2a0f1f !important; }
+.of-et.wely .tag .n { color: #ffb3d6 !important; text-shadow: 0 0 6px #ff4fa3 !important; }
+.of-et.wely .pt { background: #ff4fa3 !important; box-shadow: 0 0 10px #ff4fa3 !important; }
+.of-lema {
+  margin-top: calc(var(--k) * 4px);
+  font: 600 calc(var(--k) * 5.6px) 'Orbitron', sans-serif; letter-spacing: calc(var(--k) * 0.9px); color: #b9fbff;
+  text-shadow: 0 0 4px var(--cy-cyan), 0 0 10px var(--cy-cyan), 0 0 22px var(--cy-cyan); white-space: nowrap; margin-top: calc(var(--k) * -1px);
+  animation: of-titila 9s 2s infinite;
+}
+@keyframes of-titila { 0%, 46%, 49%, 52%, 100% { opacity: 1; } 47%, 51% { opacity: 0.55; } }
+@keyframes of-pulso { 0%, 100% { opacity: 1; } 50% { opacity: 0.45; } }
+
+/* ---------- etiquetas de agentes (como AgentLabel de OpenClaw) ---------- */
+.of-et {
+  position: absolute; transform: translate(-50%, -100%); display: flex; flex-direction: column; align-items: center;
+  pointer-events: none; font-size: max(10px, calc(var(--k) * 4.1px)); z-index: 5;
+}
+.of-et .tag {
+  pointer-events: auto; cursor: pointer; position: relative;
+  background: #1a1a2e; border: 2px solid var(--c); border-radius: 5px; color: #fff;
+  padding: 0.25em 0.6em 0.3em; font: inherit; font-weight: 700; text-align: center; white-space: nowrap; line-height: 1.15;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+}
+.of-et .tag .n { display: block; font-family: 'Orbitron', sans-serif; letter-spacing: 0.04em; }
+.of-et .tag .r { display: block; font-weight: 400; font-size: 0.78em; opacity: 0.85; }
+.of-et .pt {
+  position: absolute; top: -0.35em; right: -0.35em; width: 0.75em; height: 0.75em; border-radius: 50%;
+  background: var(--cy-green); box-shadow: 0 0 8px var(--cy-green); border: 1px solid #0a0a0f;
+}
+.of-et.trabajando .tag { box-shadow: 0 0 15px var(--c), 0 2px 8px rgba(0, 0, 0, 0.7); }
+.of-et.trabajando .pt { background: var(--cy-yellow); box-shadow: 0 0 8px var(--cy-yellow); animation: of-pulso 0.6s infinite; }
+.of-et.error .tag { border-color: var(--cy-red); }
+.of-et.error .pt { background: var(--cy-red); box-shadow: 0 0 8px var(--cy-red); }
+.of-et.cola .pt { background: #ffa94d; box-shadow: 0 0 8px #ffa94d; }
+.of-et.dormido .pt { background: #6a7388; box-shadow: none; }
+.of-et.dormido .tag { opacity: 0.75; }
+.of-et.sel .tag { outline: 2px solid #fff; outline-offset: 2px; }
+.of-et.foco .tag { animation: of-foco 1.4s 2; }
+@keyframes of-foco { 0%, 100% { box-shadow: 0 0 0 0 var(--c); } 50% { box-shadow: 0 0 0 0.6em transparent, 0 0 26px var(--c); } }
+.of-et.wely .tag { border-color: var(--cy-orange); background: #24130a; cursor: default; }
+.of-et.wely .tag .n { color: #ffb27a; text-shadow: 0 0 6px var(--cy-orange); }
+.of-et.wely .pt { background: var(--cy-orange); box-shadow: 0 0 10px var(--cy-orange); }
+
+.of-et .burbuja {
+  margin-bottom: 0.35em; padding: 0.35em 0.6em; border-radius: 6px; min-width: 9em; max-width: 17em;
+  background: rgba(10, 10, 26, 0.95); border: 2px solid var(--c); box-shadow: 0 0 14px color-mix(in srgb, var(--c) 45%, transparent);
+  display: flex; flex-direction: column; gap: 0.15em; position: relative;
+}
+.of-et .burbuja::after {
+  content: ''; position: absolute; left: 50%; bottom: -0.42em; width: 0.6em; height: 0.6em; transform: translateX(-50%) rotate(45deg);
+  background: rgba(10, 10, 26, 0.95); border-right: 2px solid var(--c); border-bottom: 2px solid var(--c);
+}
+.of-et .burbuja b { color: var(--c); font-weight: 700; white-space: nowrap; }
+.of-et .burbuja b em { font-style: normal; color: #fff; margin-left: 0.3em; }
+.of-et .burbuja b.mal { color: #ff4d6d; }
+.of-et .burbuja b.bien { color: var(--cy-green); }
+.of-et .burbuja b.cola { color: #ffa94d; }
+.of-et .burbuja b.zz { color: #9aa4b8; letter-spacing: 0.2em; }
+.of-et .burbuja span { color: #c9d1e0; font-size: 0.85em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.of-et .barra { display: block; height: 0.3em; border-radius: 1em; background: rgba(255, 255, 255, 0.1); overflow: hidden; margin-top: 0.15em; }
+.of-et .barra i { display: block; height: 100%; background: var(--c); box-shadow: 0 0 6px var(--c); transition: width 0.4s; }
+.of-et.error .burbuja { border-color: var(--cy-red); }
+
+/* ---------- tarjetas que vuelan ---------- */
+.of-vuelo {
+  position: absolute; z-index: 30; pointer-events: none; white-space: nowrap;
+  font: 700 max(10px, calc(var(--k) * 4px)) 'JetBrains Mono', monospace; padding: 0.4em 0.7em; border-radius: 8px; backdrop-filter: blur(6px);
+}
+.of-vuelo span { display: inline-block; max-width: 14em; overflow: hidden; text-overflow: ellipsis; vertical-align: bottom; }
+.of-vuelo.ida { color: #b9fbff; border: 2px solid var(--cy-cyan); background: linear-gradient(135deg, rgba(0, 245, 255, 0.18), rgba(157, 78, 221, 0.18)); box-shadow: 0 0 30px rgba(0, 245, 255, 0.6), 0 0 60px rgba(0, 245, 255, 0.2); }
+.of-vuelo.vuelta { color: #d4ffc8; border: 2px solid var(--cy-green); background: linear-gradient(135deg, rgba(57, 255, 20, 0.16), rgba(255, 215, 0, 0.14)); box-shadow: 0 0 30px rgba(57, 255, 20, 0.55), 0 0 60px rgba(57, 255, 20, 0.2); }
+.of-vuelo.falla { color: #ffd0d8; border: 2px solid var(--cy-red); background: rgba(255, 0, 64, 0.16); box-shadow: 0 0 30px rgba(255, 0, 64, 0.55); }
+.of-chispa { position: absolute; width: calc(var(--k) * 1.6px); height: calc(var(--k) * 1.6px); border-radius: 50%; z-index: 29; }
+.of-chispa.ida { background: rgba(0, 245, 255, 0.8); box-shadow: 0 0 8px var(--cy-cyan); }
+.of-chispa.vuelta { background: rgba(57, 255, 20, 0.8); box-shadow: 0 0 8px var(--cy-green); }
+.of-chispa.falla { background: rgba(255, 0, 64, 0.8); }
+.of-flash { position: absolute; width: calc(var(--k) * 12px); height: calc(var(--k) * 12px); border-radius: 50%; z-index: 28; }
+.of-flash.ida { background: radial-gradient(circle, rgba(0, 245, 255, 0.55), transparent 70%); }
+.of-flash.vuelta { background: radial-gradient(circle, rgba(57, 255, 20, 0.55), transparent 70%); }
+.of-flash.falla { background: radial-gradient(circle, rgba(255, 0, 64, 0.55), transparent 70%); }
+
+/* ---------- panel en clave neón ---------- */
+.sala-capa { position: fixed; inset: 0; pointer-events: none; z-index: 50; }
+.sala-capa .sn-dock { left: 14px; right: 14px; bottom: 12px; border: 1px solid rgba(0, 245, 255, 0.35); box-shadow: 0 0 22px rgba(0, 245, 255, 0.18), 0 12px 40px rgba(0, 0, 0, 0.6); }
+.sala-capa .sn-titulo { font-family: 'Orbitron', sans-serif; letter-spacing: 1px; color: var(--cy-cyan); text-shadow: 0 0 8px rgba(0, 245, 255, 0.7); }
+.sala-capa .sn-head .btn.primary { background: var(--cy-orange); box-shadow: 0 0 14px rgba(255, 131, 39, 0.6); }
+.sala-capa .btn { background: rgba(0, 0, 0, 0.35); border-color: rgba(0, 245, 255, 0.3); color: #d8f9ff; }
+.sala-capa .btn:hover { box-shadow: 0 0 10px rgba(0, 245, 255, 0.4); }
+.sala-capa .sn-mod { background: rgba(26, 26, 46, 0.7); }
+.sala-capa .sn-term { background: rgba(5, 5, 8, 0.6); }
+.sala-capa .sn-prog > div { background: linear-gradient(90deg, var(--cy-cyan), var(--cy-purple)); box-shadow: 0 0 8px var(--cy-cyan); }
+
+/* La capitana tiene el letrero de neón encima: su burbuja va a la derecha de la etiqueta */
+.of-et.wely .burbuja { position: absolute; left: calc(100% + 0.9em); bottom: 0; margin: 0; }
+.of-et.wely .burbuja::after {
+  left: -0.42em; bottom: 0.9em; transform: rotate(45deg);
+  border-right: 0; border-bottom: 2px solid var(--c); border-left: 2px solid var(--c);
+}
+
+/* Etiqueta de un agente que camina: más chica y sin burbuja larga */
+.of-et.camina { font-size: max(9px, calc(var(--k) * 3.6px)); }
+.of-et.camina .burbuja span, .of-et.camina .burbuja .barra { display: none; }
+
+/* Etiqueta: nombre de la persona, módulo y lo que está haciendo */
+.of-et .tag .n { font-size: 1.12em; }
+.of-et .tag .r { font-size: 0.74em; color: color-mix(in srgb, var(--c) 70%, #fff); opacity: 1; }
+.of-et .tag .a {
+  display: block; max-width: 17em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font-weight: 400; font-style: italic; font-size: 0.7em; color: #c9d1e0; margin-top: 0.1em;
+}
+.of-et.trabajando .tag .a { color: #fff3b0; }
+.of-et.error .tag .a { color: #ffb3c0; }
+.of-et.camina .tag .a { max-width: 12em; }
+
+/* Globos de diálogo entre agentes */
+.of-dialogo {
+  position: absolute; z-index: 12; transform: translate(0, -100%); pointer-events: none;
+  max-width: 15em; padding: 0.45em 0.65em; border-radius: 10px;
+  font: 500 max(10px, calc(var(--k) * 4.1px)) 'JetBrains Mono', monospace; line-height: 1.25; color: #1a1a2e;
+  background: #fffaf0; border: 2px solid #1a1a2e; box-shadow: 0 3px 0 rgba(0, 0, 0, 0.35), 0 0 14px rgba(255, 240, 200, 0.35);
+  animation: of-globo 0.22s ease-out;
+}
+.of-dialogo b { display: block; font: 700 0.78em 'Orbitron', sans-serif; color: #b2531a; letter-spacing: 0.03em; margin-bottom: 0.15em; }
+.of-dialogo::after {
+  content: ''; position: absolute; left: -0.55em; bottom: 0.5em; width: 0.8em; height: 0.8em; transform: rotate(45deg);
+  background: #fffaf0; border-left: 2px solid #1a1a2e; border-bottom: 2px solid #1a1a2e;
+}
+.of-dialogo.izq { transform: translate(-100%, -100%); }
+.of-dialogo.izq::after { left: auto; right: -0.55em; border-left: 0; border-bottom: 2px solid #1a1a2e; border-right: 2px solid #1a1a2e; transform: rotate(-45deg); }
+.of-dialogo.fuera { opacity: 0; transition: opacity 0.3s; }
+@keyframes of-globo { from { transform: translate(0, -90%) scale(0.85); opacity: 0; } }
+.of-dialogo.izq { animation-name: of-globo-izq; }
+@keyframes of-globo-izq { from { transform: translate(-100%, -90%) scale(0.85); opacity: 0; } }
+#pantallas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }

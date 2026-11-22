@@ -1,0 +1,32 @@
+{
+  "_nota": "Cómo busca cada agente en el sitio de su aerolínea. 'url' con variables {origen} {destino} {ida} {vuelta} {adultos} {ninos} o, si 'formulario' es true, la página donde se llena el buscador. 'listo' = texto que aparece cuando cargaron los resultados. Precios en pesos se convierten con CLP_POR_USD (.env).",
+  "latam": {
+    "url": "https://www.latamairlines.com/cl/es/ofertas-vuelos?origin={origen}&inbound={vueltaLatam}&outbound={ida}T12%3A00%3A00.000Z&destination={destino}&adt={adultos}&chd={ninos}&inf=0&trip={tipoLatam}&cabin={cabinaLatam}&redemption=false&sort=RECOMMENDED",
+    "listo": "Directo|escala",
+    "esperaSeg": 30
+  },
+  "sky": {
+    "url": "https://initial-sale.skyairline.com/es/chile?origin={origen}&destination={destino}&departureDate={ida}&arrivalDate={vuelta}&flightType={tipoSky}&ADT={adultos}",
+    "listo": "Precio base|Desde",
+    "esperaSeg": 35,
+    "notas": "precio base de la ida; la vuelta se estima igual"
+  },
+  "jetsmart": {
+    "url": "https://jetsmart.com/cl/es/",
+    "formulario": true,
+    "listo": "Selecciona el Vuelo de IDA",
+    "esperaSeg": 40,
+    "notas": "tasas no incluidas"
+  },
+  "copa": {
+    "url": "https://shopping.copaair.com/?roundtrip={idaVuelta}&adults={adultos}&children={ninos}&infants=0&date1={ida}&date2={vuelta}&area1={origen}&area2={destino}&flexible_dates_v2=false&isMiles=false&langid=es",
+    "listo": "USD|Precio",
+    "esperaSeg": 35
+  },
+  "iberia": {
+    "url": "https://www.iberia.com/cl/",
+    "formulario": true,
+    "listo": "Selecciona|vuelo de ida|IDA",
+    "esperaSeg": 40
+  }
+}
